@@ -1,5 +1,6 @@
 package com.example.restapi.events;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,8 @@ import java.time.LocalDateTime;
 
 public class Event {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Integer id;
     private String name;
     private String description;
@@ -30,6 +32,22 @@ public class Event {
     private boolean offLine;
     private boolean free;
     @Enumerated(EnumType.STRING)
-    private EventStatus eventStatus;
+    private EventStatus eventStatus = EventStatus.DRAFT;
+
+    public void update() {
+        //Update free
+        if (this.basePrice == 0 && this.maxPrice == 0) {
+            this.free = true;
+        } else {
+            this.free = false;
+        }
+        // Update offline
+        if (this.location == null || this.location.isBlank()) {
+            this.offLine = false;
+        } else {
+            this.offLine = true;
+        }
+    }
+
 }
 
