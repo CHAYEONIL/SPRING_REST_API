@@ -1,4 +1,4 @@
-package me.whiteship.demoinfleanrestapi.common;
+package com.example.restapi.common;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
